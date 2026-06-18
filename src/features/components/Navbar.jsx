@@ -12,124 +12,139 @@ const Navbar = () => {
   const { searchQuery, setSearchQuery } = useSearch();
   const [menuOpen, setMenuOpen] = useState(false);
 
-  function handleSearch(e) {
+  const handleSearch = (e) => {
     const value = e.target.value;
     setSearchQuery(value);
 
     if (location.pathname !== "/products") {
       navigate("/products");
     }
-  }
+  };
 
   return (
-    <header className="sticky top-0 z-50 border-b border-zinc-800 bg-[#09090b]/95 backdrop-blur-xl">
-      <nav className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5">
-
-        {/* Logo */}
-        <button
-          onClick={() => navigate("/")}
-          className="text-left transition hover:opacity-80"
-        >
-          <h1 className="text-2xl font-black tracking-tight text-white">
+    <>
+      <header className="sticky top-0 z-50 border-b border-zinc-800 bg-[#09090b]/95 backdrop-blur-xl">
+        <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5">
+          {/* Logo */}
+          <button
+            onClick={() => navigate("/")}
+            className="text-2xl font-black tracking-tight text-white"
+          >
             Fake<span className="text-zinc-500">Store</span>
-          </h1>
-        </button>
+          </button>
 
-        {/* Desktop Search */}
-        <div className="hidden flex-1 px-10 lg:flex">
-          <div className="relative mx-auto w-full max-w-xl">
-
-            <i className="ri-search-line absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400"></i>
-
+          {/* Desktop Search */}
+          <div className="hidden flex-1 px-10 lg:block">
             <input
               type="text"
-              placeholder="Search products..."
               value={searchQuery}
               onChange={handleSearch}
-              className="h-12 w-full rounded-2xl border border-zinc-700 bg-zinc-800 pl-12 pr-4 text-white placeholder:text-zinc-400 outline-none transition-all duration-200 focus:border-white"
-            />
-          </div>
-        </div>
-
-        {/* Desktop Navigation */}
-        <div className="hidden items-center gap-2 lg:flex">
-          <Link
-            to="/products"
-            className={`rounded-xl px-5 py-2.5 transition ${
-              location.pathname === "/products"
-                ? "bg-white text-black"
-                : "text-zinc-300 hover:bg-zinc-800 hover:text-white"
-            }`}
-          >
-            Products
-          </Link>
-
-          <Link
-            to="/cart"
-            className={`flex items-center gap-2 rounded-xl px-5 py-2.5 transition ${
-              location.pathname === "/cart"
-                ? "bg-white text-black"
-                : "text-zinc-300 hover:bg-zinc-800 hover:text-white"
-            }`}
-          >
-            <i className="ri-shopping-bag-3-line text-lg"></i>
-            Cart
-          </Link>
-        </div>
-
-        {/* Mobile Menu */}
-        <button
-          onClick={() => setMenuOpen(!menuOpen)}
-          className="rounded-xl p-2 text-white transition hover:bg-zinc-800 lg:hidden"
-        >
-          <i
-            className={`text-2xl ${
-              menuOpen ? "ri-close-line" : "ri-menu-line"
-            }`}
-          ></i>
-        </button>
-      </nav>
-
-      {/* Mobile Drawer */}
-      {menuOpen && (
-        <div className="border-t border-zinc-800 bg-[#09090b] px-5 py-5 lg:hidden">
-
-          <div className="relative mb-5">
-
-            <i className="ri-search-line absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400"></i>
-
-            <input
-              type="text"
               placeholder="Search products..."
-              value={searchQuery}
-              onChange={handleSearch}
-              className="h-12 w-full rounded-2xl border border-zinc-700 bg-zinc-800 pl-12 pr-4 text-white placeholder:text-zinc-400 outline-none"
+              className="h-11 w-full rounded-xl border border-zinc-700 bg-zinc-800 px-4 text-white placeholder:text-zinc-500 outline-none transition focus:border-white"
             />
           </div>
 
-          <div className="space-y-3">
-
+          {/* Desktop Links */}
+          <div className="hidden items-center gap-2 lg:flex">
             <Link
               to="/products"
-              onClick={() => setMenuOpen(false)}
-              className="block rounded-xl border border-zinc-800 bg-zinc-900 px-4 py-3 text-white transition hover:bg-zinc-800"
+              className={`rounded-xl px-4 py-2 transition ${
+                location.pathname === "/products"
+                  ? "bg-white text-black"
+                  : "text-zinc-300 hover:bg-zinc-800"
+              }`}
             >
               Products
             </Link>
 
             <Link
               to="/cart"
-              onClick={() => setMenuOpen(false)}
-              className="flex items-center gap-2 rounded-xl border border-zinc-800 bg-zinc-900 px-4 py-3 text-white transition hover:bg-zinc-800"
+              className={`rounded-xl px-4 py-2 transition ${
+                location.pathname === "/cart"
+                  ? "bg-white text-black"
+                  : "text-zinc-300 hover:bg-zinc-800"
+              }`}
             >
-              <i className="ri-shopping-bag-3-line"></i>
+              <i className="ri-shopping-bag-line mr-2"></i>
               Cart
             </Link>
-
           </div>
-        </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setMenuOpen(true)}
+            className="lg:hidden"
+          >
+            <i className="ri-menu-3-line text-3xl text-white"></i>
+          </button>
+        </nav>
+      </header>
+
+      {/* Overlay */}
+      {menuOpen && (
+        <div
+          className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm"
+          onClick={() => setMenuOpen(false)}
+        />
       )}
-    </header>
+
+      {/* Mobile Drawer */}
+      <aside
+        className={`fixed right-0 top-0 z-50 h-full w-[85%] max-w-sm bg-[#111111] border-l border-zinc-800 p-6 transition-transform duration-300 ${
+          menuOpen ? "translate-x-0" : "translate-x-full"
+        }`}
+      >
+        {/* Top */}
+        <div className="mb-8 flex items-center justify-between">
+          <h2 className="text-2xl font-bold text-white">
+            Menu
+          </h2>
+
+          <button onClick={() => setMenuOpen(false)}>
+            <i className="ri-close-line text-3xl text-white"></i>
+          </button>
+        </div>
+
+        {/* Search */}
+        <input
+          type="text"
+          value={searchQuery}
+          onChange={handleSearch}
+          placeholder="Search products..."
+          className="mb-8 h-12 w-full rounded-xl border border-zinc-700 bg-zinc-800 px-4 text-white placeholder:text-zinc-500 outline-none focus:border-white"
+        />
+
+        {/* Links */}
+        <div className="flex flex-col gap-3">
+          <Link
+            to="/"
+            onClick={() => setMenuOpen(false)}
+            className="rounded-xl bg-zinc-900 px-4 py-4 text-white transition hover:bg-zinc-800"
+          >
+            <i className="ri-home-5-line mr-3"></i>
+            Home
+          </Link>
+
+          <Link
+            to="/products"
+            onClick={() => setMenuOpen(false)}
+            className="rounded-xl bg-zinc-900 px-4 py-4 text-white transition hover:bg-zinc-800"
+          >
+            <i className="ri-store-2-line mr-3"></i>
+            Products
+          </Link>
+
+          <Link
+            to="/cart"
+            onClick={() => setMenuOpen(false)}
+            className="rounded-xl bg-zinc-900 px-4 py-4 text-white transition hover:bg-zinc-800"
+          >
+            <i className="ri-shopping-cart-2-line mr-3"></i>
+            Cart
+          </Link>
+        </div>
+      </aside>
+    </>
   );
 };
 

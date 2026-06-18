@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Link, useParams } from "react-router";
 import { useProduct } from "../hooks/useProduct";
@@ -11,8 +10,17 @@ const ProductDetail = () => {
 
   if (!products || products.length === 0) {
     return (
-      <main className="flex min-h-screen items-center justify-center bg-gradient-to-br from-black via-zinc-950 to-zinc-900 text-white">
-        <h1 className="text-2xl font-semibold">Loading...</h1>
+      <main
+        className="flex min-h-screen flex-col items-center justify-center gap-4 bg-[#09090b] text-white"
+        aria-live="polite"
+      >
+        <i
+          className="ri-loader-4-line animate-spin text-4xl text-zinc-500"
+          aria-hidden="true"
+        ></i>
+        <h1 className="text-xl font-semibold text-zinc-300">
+          Loading Product...
+        </h1>
       </main>
     );
   }
@@ -21,16 +29,25 @@ const ProductDetail = () => {
 
   if (!product) {
     return (
-      <main className="flex min-h-screen flex-col items-center justify-center gap-5 bg-gradient-to-br from-black via-zinc-950 to-zinc-900 px-4 text-white">
-        <i className="ri-error-warning-line text-6xl text-red-500"></i>
+      <main className="flex min-h-screen flex-col items-center justify-center bg-[#09090b] px-6 text-center text-white">
+        <div className="flex h-20 w-20 items-center justify-center rounded-full bg-zinc-900 ring-1 ring-zinc-800">
+          <i
+            className="ri-error-warning-line text-4xl text-zinc-500"
+            aria-hidden="true"
+          ></i>
+        </div>
 
-        <h1 className="text-center text-3xl font-bold">
+        <h1 className="mt-6 text-3xl font-bold tracking-tight">
           Product Not Found
         </h1>
 
+        <p className="mt-2 max-w-sm text-zinc-400">
+          The product you're looking for doesn't exist.
+        </p>
+
         <Link
           to="/products"
-          className="rounded-xl bg-violet-600 px-6 py-3 transition hover:bg-violet-700"
+          className="mt-8 rounded-xl bg-white px-6 py-3 font-semibold text-black transition active:scale-[0.98] hover:bg-zinc-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-2 focus-visible:ring-offset-[#09090b]"
         >
           Back to Products
         </Link>
@@ -39,81 +56,74 @@ const ProductDetail = () => {
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-black via-zinc-950 to-zinc-900 px-4 py-8 text-white sm:px-6 lg:px-10">
-      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-14">
-        {/* Image Section */}
-        <div className="rounded-3xl border border-zinc-800 bg-white p-6 shadow-2xl">
-          <div className="flex items-center justify-center">
+    <main className="min-h-screen bg-[#09090b] px-4 py-8 text-white sm:px-6 lg:px-8 lg:py-28">
+      <div className="mx-auto max-w-7xl">
+        <Link
+          to="/products"
+          className="inline-flex items-center gap-2 text-sm text-zinc-400 transition hover:text-white"
+        >
+          <i className="ri-arrow-left-line" aria-hidden="true"></i>
+          Back to Products
+        </Link>
+
+        <div className="mt-6 grid items-start gap-10 lg:grid-cols-2 lg:gap-16">
+          {/* Image */}
+          <div className="overflow-hidden rounded-3xl border border-zinc-800 bg-[#f5f5f5] p-6 lg:p-8">
             <img
               src={product.image}
               alt={product.title}
-              className="h-64 object-contain transition duration-300 hover:scale-105 sm:h-80 lg:h-[500px]"
+              className="mx-auto h-64 w-full object-contain transition duration-300 motion-safe:hover:scale-105 sm:h-80 lg:h-[380px]"
             />
           </div>
-        </div>
 
-        {/* Details Section */}
-        <div className="flex flex-col justify-center">
-          <span className="mb-4 w-fit rounded-full bg-violet-500/20 px-4 py-1 text-sm capitalize text-violet-300">
-            {product.category}
-          </span>
-
-          <h1 className="text-2xl font-extrabold leading-tight sm:text-3xl lg:text-5xl">
-            {product.title}
-          </h1>
-
-          <div className="mt-5 flex items-center gap-2">
-            <i className="ri-star-fill text-yellow-400"></i>
-
-            <span className="font-semibold">
-              {product.rating?.rate}
+          {/* Details */}
+          <div className="flex flex-col">
+            <span className="w-fit rounded-full border border-zinc-700 bg-zinc-900 px-3 py-1 text-xs font-medium uppercase tracking-widest text-zinc-400">
+              {product.category}
             </span>
 
-            <span className="text-zinc-400">
-              ({product.rating?.count} reviews)
-            </span>
-          </div>
+            <h1 className="mt-4 text-2xl font-extrabold leading-tight tracking-tight sm:text-3xl md:text-4xl lg:text-5xl">
+              {product.title}
+            </h1>
 
-          <h2 className="mt-6 text-4xl font-extrabold text-green-400 lg:text-5xl">
-            ${product.price}
-          </h2>
+            <div className="mt-5 flex flex-wrap items-center justify-between gap-3">
+              <h2 className="text-3xl font-bold sm:text-4xl">
+                ${product.price}
+              </h2>
 
-          <p className="mt-6 leading-8 text-zinc-300">
-            {product.description}
-          </p>
-
-          <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-            <button
-              onClick={() => addToCart(product)}
-              className="flex-1 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 px-8 py-4 text-lg font-semibold transition duration-300 hover:scale-[1.02]"
-            >
-              <i className="ri-shopping-cart-2-line mr-2"></i>
-              Add to Cart
-            </button>
-
-            <Link
-              to="/products"
-              className="flex-1 rounded-xl border border-zinc-700 px-8 py-4 text-center text-lg transition hover:bg-zinc-800"
-            >
-              <i className="ri-arrow-left-line mr-2"></i>
-              Back
-            </Link>
-          </div>
-
-          <div className="mt-10 grid grid-cols-3 gap-4">
-            <div className="rounded-2xl border border-zinc-800 bg-zinc-900 p-4 text-center">
-              <i className="ri-truck-line text-2xl text-cyan-400"></i>
-              <p className="mt-2 text-sm">Fast Delivery</p>
+              {product.rating && (
+                <div className="flex items-center gap-1.5 rounded-full border border-zinc-700 bg-zinc-900 px-3 py-1.5 text-sm text-zinc-300">
+                  <i
+                    className="ri-star-fill text-amber-400"
+                    aria-hidden="true"
+                  ></i>
+                  <span className="font-semibold">{product.rating.rate}</span>
+                  <span className="text-zinc-500">
+                    ({product.rating.count})
+                  </span>
+                </div>
+              )}
             </div>
 
-            <div className="rounded-2xl border border-zinc-800 bg-zinc-900 p-4 text-center">
-              <i className="ri-shield-check-line text-2xl text-green-400"></i>
-              <p className="mt-2 text-sm">Secure Payment</p>
-            </div>
+            <p className="mt-6 leading-7 text-zinc-400">
+              {product.description}
+            </p>
 
-            <div className="rounded-2xl border border-zinc-800 bg-zinc-900 p-4 text-center">
-              <i className="ri-refresh-line text-2xl text-orange-400"></i>
-              <p className="mt-2 text-sm">Easy Returns</p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <button
+                onClick={() => addToCart(product)}
+                className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl bg-white px-6 py-3 font-semibold text-black transition active:scale-[0.98] hover:bg-zinc-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-2 focus-visible:ring-offset-[#09090b]"
+              >
+                <i className="ri-shopping-cart-line" aria-hidden="true"></i>
+                Add to Cart
+              </button>
+
+              <Link
+                to="/products"
+                className="flex-1 rounded-xl border border-zinc-700 px-6 py-3 text-center transition active:scale-[0.98] hover:bg-zinc-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-2 focus-visible:ring-offset-[#09090b]"
+              >
+                Back
+              </Link>
             </div>
           </div>
         </div>

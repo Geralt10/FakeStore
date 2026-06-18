@@ -72,7 +72,7 @@ const Products = () => {
             onChange={(e) => setSelectedSort(e.target.value)}
             className="rounded-2xl border border-zinc-700 bg-zinc-800 px-4 py-3 text-white outline-none transition focus:border-white"
           >
-            <option value="none">Default Sorting</option>
+            <option value="none">None</option>
             <option value="lowToHigh">
               Price: Low → High
             </option>
