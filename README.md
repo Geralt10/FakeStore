@@ -1,16 +1,92 @@
-# React + Vite
+# 🛍️ FakeStore
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern and responsive e-commerce frontend built with **React** and **Tailwind CSS**. The application integrates with the Fake Store API to provide product browsing, filtering, searching, sorting, pagination, product details, and cart management.
 
-Currently, two official plugins are available:
+## ✨ Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+* 🔍 Real-time product search
+* 📂 Dynamic category filtering
+* ↕️ Price sorting (Low → High / High → Low)
+* 📄 Client-side pagination
+* 🛒 Shopping cart with:
 
-## React Compiler
+  * Add to cart
+  * Increase/decrease quantity
+  * Remove individual items
+  * Clear entire cart
+* 📦 Product detail page
+* 📱 Fully responsive design
+* ⚡ Context API + Custom Hooks for state management
+* 🎨 Modern dark-themed UI built with Tailwind CSS
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🛠️ Tech Stack
 
-## Expanding the ESLint configuration
+* React
+* React Router
+* Tailwind CSS
+* Context API
+* Custom Hooks
+* Axios
+* Fake Store API
+* Remix Icons
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 📁 Project Structure
+
+```
+src/
+├── features/
+│   ├── components/
+│   ├── context/
+│   ├── hooks/
+│   ├── pages/
+│   └── services/
+├── App.jsx
+└── main.jsx
+```
+
+## 🚀 Getting Started
+
+Clone the repository:
+
+```bash
+git clone https://github.com/Geralt10/FakeStore.git
+```
+
+Navigate to the project:
+
+```bash
+cd FakeStore
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+## 🌟 Highlights
+
+* Clean and reusable component architecture
+* Custom React hooks for modular logic
+* Responsive layouts for mobile, tablet, and desktop
+* Smooth user experience with deferred search and optimized rendering
+* Professional UI inspired by modern e-commerce platforms
+
+## 📌 Future Improvements
+
+* User authentication
+* Wishlist functionality
+* Persistent cart using localStorage
+* Checkout flow
+* Payment gateway integration
+* Product reviews and ratings
+
+## 📄 License
+
+This project is created for learning and portfolio purposes.
