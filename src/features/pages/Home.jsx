@@ -35,14 +35,14 @@ const Home = () => {
         <div className="mt-10 flex w-full flex-col gap-4 sm:w-auto sm:flex-row">
           <button
             onClick={() => navigate("/products")}
-            className="rounded-2xl bg-white px-8 py-4 font-semibold text-black transition hover:opacity-90"
+            className="rounded-2xl bg-white px-8 py-4 font-semibold text-black transition hover:opacity-90 cursor-pointer "
           >
             Explore Products
           </button>
 
           <button
             onClick={() => navigate("/cart")}
-            className="rounded-2xl border border-zinc-700 bg-zinc-900 px-8 py-4 font-semibold transition hover:bg-zinc-800"
+            className="rounded-2xl border border-zinc-700 bg-zinc-900 px-8 py-4 font-semibold transition hover:bg-zinc-800 cursor-pointer"
           >
             View Cart
           </button>

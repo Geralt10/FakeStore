@@ -28,7 +28,7 @@ const Navbar = () => {
           {/* Logo */}
           <button
             onClick={() => navigate("/")}
-            className="text-2xl font-black tracking-tight text-white"
+            className="text-2xl font-black tracking-tight text-white cursor-pointer transition hover:opacity-90"
           >
             Fake<span className="text-zinc-500">Store</span>
           </button>

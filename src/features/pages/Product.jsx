@@ -53,10 +53,10 @@ const Product = ({ currentItems }) => {
           </Link>
 
           {/* Footer */}
-          <div className="border-t border-zinc-800 p-4">
+          <div className="border-t border-zinc-800 p-4 cursor-pointer">
             <button
               onClick={() => addToCart(product)}
-              className="w-full rounded-xl bg-zinc-100 py-3 font-semibold text-black transition hover:bg-white active:scale-[0.98]"
+              className="w-full rounded-xl bg-zinc-100 py-3 font-semibold text-black transition hover:bg-white active:scale-[0.98] "
             >
               <i className="ri-shopping-cart-line mr-2"></i>
               Add to Cart
