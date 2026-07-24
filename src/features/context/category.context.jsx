@@ -17,7 +17,6 @@ const CategoryProvider = ({ children }) => {
         setCategories,
         selectedCategory,
         setSelectedCategory,
-        sortOptions,
         selectedSort,
         setSelectedSort,
       }}

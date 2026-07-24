@@ -1,4 +1,4 @@
-import { useDeferredValue } from "react";
+import { useDeferredValue, useMemo } from "react";
 import { useCategory } from "./useCategory";
 import { useProduct } from "./useProduct";
 import { useSearch } from "./useSearch";
@@ -8,17 +8,17 @@ export const useFilteredProduct =()=>{
     const {selectedCategory,selectedSort}=useCategory()
     const {searchQuery}=useSearch();
     const deferredSearchValue = useDeferredValue(searchQuery);
-    const normalizedSearchValue = deferredSearchValue.trim().toLowerCase()
+    const normalizedSearchValue = deferredSearchValue.trim().toLowerCase();
 
-    const makeCategory = ()=>{
+    const makeCategory = useMemo(()=>{
         const categorySet = new Set();
         for(const product of products){
             categorySet.add(product.category)
         }
         return ["all",...categorySet]
-    }
+    }, [products])
 
-    const filteredAndSortedProduct = ()=>{
+    const filteredAndSortedProduct = useMemo(()=>{
         const filteredProduct= [];
         for(const product of products){
             const matchSearch = !normalizedSearchValue ||
@@ -45,7 +45,12 @@ export const useFilteredProduct =()=>{
 
         return sortedProducts
 
-    }
+    }, [
+        products,
+        normalizedSearchValue,
+        selectedCategory,
+        selectedSort,
+    ])
 
     return{
         makeCategory,filteredAndSortedProduct
