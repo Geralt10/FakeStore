@@ -16,11 +16,7 @@ const Products = () => {
     setSelectedSort,
   } = useCategory();
 
-  const { makeCategory, filteredAndSortedProduct } =
-    useFilteredProduct();
-
-  const categories = makeCategory(products);
-  const filteredProducts = filteredAndSortedProduct();
+ const { categories, filteredProducts } = useFilteredProduct();
 
   const {
     currentPage,
